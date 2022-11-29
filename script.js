@@ -6,15 +6,13 @@ window.addEventListener("load", function() {
             response.json().then( function(data) {
                 const div = document.getElementById("container");
 
-                const numAstronauts = document.getElementById("numAstronauts")
+                const numAstronauts = document.getElementById("numAstronauts");
 
-                //console.log(data.length);
+                numAstronauts.innerHTML = "There are " + data.length + " astronauts!";
 
-                numAstronauts.innerHTML = data.length;
-
-                // let newArray = data.sort();
-
-                // console.log(newArray)
+                data.sort(function(a, b) {
+                    return a.hoursInSpace < b.hoursInSpace ? 1 : -1
+                })
                 
                 for (let i = 0; i < data.length; i++) {
 
@@ -26,10 +24,10 @@ window.addEventListener("load", function() {
                                     <ul>
                                         <li>Hours in space: ${data[i].hoursInSpace}</li>
                                         <li style="color:green;">Active: ${data[i].active}</li>
-                                        <li>Skills: ${data[i].skills}</li>
+                                        <li>Skills: ${data[i].skills.join(", ")}</li>
                                     </ul>
                                 </div>
-                                <img class="avatar" src=${data[i].picture}>
+                                <img class="avatar" src="${data[i].picture}">
                             </div>
                         `;
                     }
@@ -42,7 +40,7 @@ window.addEventListener("load", function() {
                                     <ul>
                                         <li>Hours in space: ${data[i].hoursInSpace}</li>
                                         <li>Active: ${data[i].active}</li>
-                                        <li>Skills: ${data[i].skills}</li>
+                                        <li>Skills: ${data[i].skills.join(", ")}</li>
                                     </ul>
                                 </div>
                                 <img class="avatar" src=${data[i].picture}>
